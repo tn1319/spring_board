@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>jdbc/oracleXE</value>
+		</property>
+		<property name="resourceRef" value="true"></property>
+	</bean> -->
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:xe"></property>
+		<property name="username" value="spring09"></property>
+		<property name="password" value="spring09"></property>
+	</bean>
+	
+	<bean id="springJdbc" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	 -->
+	<context:annotation-config/>
+	
+	<bean id="boardDAO" class="board.dao.BoardDAOImpl">
+		<!-- <property name="jdbcTemplete" ref="springJdbc"></property> -->
+	</bean>
+	
+	<bean class="board.controller.BoardController">
+	</bean>
+	
+	<!-- <bean name="/board_list.do"	class="board.controller.BoardListController">
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	
+	<bean name="/board_writeForm.do" class="board.controller.BoardWriteFormController">
+	</bean>
+	
+	<bean name="/board_writePro.do" class="board.controller.BoardWriteProCommandController">
+		<property name="commandClass" value="board.dto.BoardDTO"></property>
+		<property name="commandName" value="boardCmd"></property>
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	
+	<bean name="/content.do" class="board.controller.BoardContentController">
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	
+	<bean name="/delete.do" class="board.controller.DeleteController">
+		<property name="supportedMethods">
+			<value>GET,POST</value>
+		</property>
+		<property name="requireSession"> 세션을 사용함 default는 false
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean name="/deletePro.do" class="board.controller.DeleteProController">
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	
+	<bean name="/update.do" class="board.controller.UpdateController">
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	
+	<bean name="/updatePro.do" class="board.controller.UpdateProController">
+		<property name="boardDAO" ref="boardDAO"></property>
+		<property name="commandClass" value="board.dto.BoardDTO"></property>
+		<property name="commandName" value="boardCmd"></property>
+	</bean> -->
+	
+</beans>

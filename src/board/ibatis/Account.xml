@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="boardDTO" type="board.dto.BoardDTO"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties 
+       exactly. -->
+  <resultMap id="boardResult" class="boardDTO">
+    <result property="num" column="num"/>
+    <result property="writer" column="writer"/>
+    <result property="email" column="email"/>
+    <result property="subject" column="subject"/>
+    <result property="passwd" column="passwd"/>
+    <result property="reg_date" column="reg_date"/>
+    <result property="readCount" column="readcount"/>
+    <result property="content" column="content"/>
+    <result property="ip" column="ip"/>
+    <result property="re_step" column="re_step"/>
+    <result property="re_level" column="re_level"/>
+  </resultMap>
+
+  <!-- Select with no parameters using the result map for Account class. -->
+  <select id="listBoard" resultMap="boardResult">
+    select * from spring_board order by re_step asc
+  </select>
+  
+  <select id="getBoard" parameterClass="int" resultClass="boardDTO">
+  	select * from spring_board where num= #num#
+  </select>
+  
+  <update id="plusReadcount" parameterClass="int">
+  	update spring_board set readcount=readcount+1 where num=#num#
+  </update>
+
+  <insert id="insertBoard" parameterClass="boardDTO">
+  	insert into spring_board values(board_seq.nextval,#writer#,#email#,#subject#,#passwd#,sysdate,0,#content#,#ip#,#re_step#,#re_level#)
+  </insert>
+  
+  <update id="plusRe_step1">
+  	update spring_board set re_step=re_step+1
+  </update>
+  
+  <update id="plusRe_step2" parameterClass="int">
+  	update spring_board set re_step=re_step+1 where re_step>#re_step#
+  </update>
+  
+  <delete id="deleteBoard" parameterClass="int">
+    delete spring_board where num=#num#
+  </delete>
+  
+  <update id="updateBoard" parameterClass="boardDTO">
+  update spring_board set writer=#writer#, subject=#subject#, email=#email#, content=#content# where num=#num#
+  </update>
+  
+</sqlMap>
